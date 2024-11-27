@@ -1,10 +1,10 @@
-import  React from "react";
 
-export default  function ButtonComponent (props:{children:React.ReactNode}){
+export default  function ButtonComponent (prop){
+ const name = prop.name;
 
-    return (
+ return (
     <>
-        <button>{props.children}</button>
+        <button onClick={()=>prop.onClick(name)}>{name}</button>&nbsp;
     </>
     )
 }
