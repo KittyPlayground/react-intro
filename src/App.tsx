@@ -1,33 +1,28 @@
 import './App.css'
-import Item from "./component/Item.tsx";
+import Dashboard from "./component/Dashboard.tsx";
+import Login from "./component/Login.tsx";
+
+import {ReactElement} from "react";
+
 function App() {
-const itemArray =[]
-    for(const item of itemList){
-        itemArray.push(
-            <Item title={item.title} desc={item.desc}/>
-        )
+
+    const isLoggedIn : boolean = true;
+    let content :ReactElement;
+
+    if(isLoggedIn){
+        content = <Dashboard/>
+    }else {
+        content =<Login/>
     }
+
+
     return (
-       <>
-          {/*<Item title={itemList[0].title} desc={itemList[0].desc}/>
-           <Item title={itemList[1].title} desc={itemList[1].desc}/>
-           */}
-           {/*<Item{...itemList[0]}/>
-           <Item{...itemList[1]}/>
-           <Item{...itemList[2]}/>*/}
-           {/*{
-               itemList.map(item=>{
-               return<Item title={item.title} desc={item.desc}/>
-               })
-           }*/}
-           {itemArray}
-       </>
+       <div>
+           {isLoggedIn?<Dashboard/>:<Login/>}
+           {content}
+       </div>
     )
 }
-const itemList = [
-    {title: "RAD", desc: "lorem ipsum"},
-    {title: "CAD", desc: "lorem ipsum"},
-    {title: "BAD", desc: "lorem ipsum"},
-]
+
 
 export default App
