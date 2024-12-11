@@ -1,24 +1,38 @@
 import './App.css'
-import ButtonComponent from "./component/ButtonComponent.tsx";
-import {useState} from "react";
+
+import {createBrowserRouter} from "react-router";
+import {Dashboard} from "./pages/DashBoard.tsx";
+import {AddCustomer} from "./pages/AddCustomer.tsx";
+import {DeleteCustomer} from "./pages/DeleteCustomer.tsx";
+import {UpdateCustomer} from "./pages/UpdateCustomer.tsx";
+import {RouterProvider} from "react-router/dom";
+import {RootLayout} from "./component/RootLayout.tsx";
 
 
 function App() {
-    const [content,setContent] = useState("Default content");
-    function handleClick(type : string) {
-        console.log('click')
-        //alert((type + ' clicked'))
-        setContent(type)
-    }
+
+    const routes = createBrowserRouter([
+
+        {
+            path: "",
+            element: <RootLayout/>,
+            children: [
+                 {path: "", element: <Dashboard/>},
+                 {path:'/add',element:<AddCustomer/>},
+                 {path:'/update',element:<UpdateCustomer/>},
+                 {path:'/delete',element:<DeleteCustomer/>}
+
+            ]
+        }
+
+        ]
+    )
 
     return (
         <>
-            <ButtonComponent name ="Dashboard" onClick = {handleClick}></ButtonComponent>
-            <ButtonComponent name ="Add customer" onClick = {handleClick}></ButtonComponent>
-            <ButtonComponent name ="Delete customer" onClick = {handleClick}></ButtonComponent>
-            <br></br>
-            {content}
+            <RouterProvider router={routes}/>
         </>
-    )
-}
+    )}
+
+
 export default App
